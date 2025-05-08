@@ -11,26 +11,49 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
+ENV = os.getenv('ENV')
+env_path = os.path.join(BASE_DIR, f'.env.{ENV}')
+load_dotenv(env_path)
+print(f'\nEnvironment: {ENV}')
+
+# Env variables
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL') 
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+TEST_HEADLESS = os.getenv('TEST_HEADLESS') == 'True'
+STORAGE_AWS = os.environ.get("STORAGE_AWS") == "True"
+USE_SQLITE = os.environ.get("USE_SQLITE") == "True"
+
+# Email settings
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+
+#Host settings
+HOST = os.getenv('HOST')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2yp$7kpii0nmoh%t(0-0+03ou@x7!wbc)hb%d7r3-_ngn5sbjm'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 # Application definition
 
 INSTALLED_APPS = [
+    #local apps
+    "raffles",
+    "core",
+    # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,3 +144,40 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Storage settings
+if STORAGE_AWS:
+    # aws settings
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+    AWS_DEFAULT_ACL = None
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
+    # s3 static settings
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+    STATICFILES_STORAGE = 'cadiashop.storage_backends.StaticStorage'
+    # s3 public media settings
+
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'cadiashop.storage_backends.PublicMediaStorage'
+
+    # s3 private media settings
+    PRIVATE_MEDIA_LOCATION = 'private'
+    PRIVATE_FILE_STORAGE = 'cadiashop.storage_backends.PrivateMediaStorage'
+    
+    # Disable Django's own staticfiles handling in favour of WhiteNoise
+    # for greater consistency between gunicorn and
+    STATIC_ROOT = None
+    MEDIA_ROOT = None
+else:
+    # Local development (Windows or local server)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    
+    # Static files (CSS, JavaScript, Images)
+    STATIC_URL = '/static/'
+    MEDIA_URL = '/media/'
