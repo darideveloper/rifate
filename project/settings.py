@@ -25,7 +25,6 @@ load_dotenv(env_path)
 print(f'\nEnvironment: {ENV}')
 
 # Env variables
-ADMIN_EMAIL = os.getenv('ADMIN_EMAIL') 
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 TEST_HEADLESS = os.getenv('TEST_HEADLESS') == 'True'
@@ -96,13 +95,35 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+IS_TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if IS_TESTING or USE_SQLITE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+
+    options = {}
+    if os.environ.get("DB_ENGINE") == "django.db.backends.mysql":
+        options = {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        }
+
+    DATABASES = {
+        'default': {
+            'ENGINE': os.environ.get("DB_ENGINE"),
+            'NAME': os.environ.get("DB_NAME"),
+            'USER': os.environ.get("DB_USER"),
+            'PASSWORD': os.environ.get("DB_PASSWORD"),
+            'HOST': os.environ.get("DB_HOST"),
+            'PORT': os.environ.get("DB_PORT"),
+            'OPTIONS': options,
+        }
+    }
 
 
 # Password validation
@@ -127,19 +148,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -186,11 +204,11 @@ else:
 
 JAZZMIN_SETTINGS = {
     # Yext
-    "site_title": "Rifate Dashboard",
+    "site_title": "Rifate",
     "site_header": "Admin",
     "site_brand": "Rifate",
-    "welcome_sign": "Welcome to Rifate",
-    "copyright": "Powered by Niels Bored & Dari Developer © 2025 All Righst Reserved",
+    "welcome_sign": "Bienvenido a Rifate",
+    "copyright": "Provisionado por Niels Bored & Dari Developer © 2025 Derechos reservados",
 
     # Media
     "site_logo": "shop/logo.png",
@@ -262,9 +280,9 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
-        "raffles.Raffle": "fas fa-solid fa-newspaper",
-        "raffles.Ticket": "fas fa-solid fa-newspaper",       
-        "raffles.User": "fas fa-solid fa-newspaper", 
+        "raffles.Raffle": "fas fa-solid fa-calendar-days",
+        "raffles.Ticket": "fas fa-solid fa-ticket",
+        "raffles.User": "fas fa-solid fa-user", 
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
