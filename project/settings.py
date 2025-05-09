@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     #local apps
     "raffles",
     "core",
+    "jazzmin",
     # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -181,3 +182,130 @@ else:
     # Static files (CSS, JavaScript, Images)
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
+
+
+JAZZMIN_SETTINGS = {
+    # Yext
+    "site_title": "Rifate Dashboard",
+    "site_header": "Admin",
+    "site_brand": "Rifate",
+    "welcome_sign": "Welcome to Rifate",
+    "copyright": "Powered by Niels Bored & Dari Developer © 2025 All Righst Reserved",
+
+    # Media
+    "site_logo": "shop/logo.png",
+    "login_logo": "shop/logo.png",
+    "login_logo_dark": "shop/logo.png",
+    "site_logo_classes": "img-circle",
+    "site_icon": "shop/favicon.png",
+    
+    # Search model in header
+    "search_model": ["raffles.Raffle"],
+
+    # Field name on user model that contains avatar
+    # ImageField/URLField/Charfield or a callable that receives the user
+    "user_avatar": None,
+
+    ############
+    # Top Menu #
+    ############
+
+    # Links to put along the top menu
+    "topmenu_links": [
+        {"name": "Home", "url": HOST},
+    ],
+
+    #############
+    # User Menu #
+    #############
+
+    # Additional links to include in the user menu on the top right
+    # ("app" url type is not allowed)
+    "usermenu_links": [
+        # {"model": "auth.user"}
+    ],
+
+    #############
+    # Side Menu #
+    #############
+
+    # Whether to display the side menu
+    "show_sidebar": True,
+
+    # Whether to aut expand the menu
+    "navigation_expanded": True,
+
+    # Hide these apps when generating side menu e.g (auth)
+    "hide_apps": [],
+
+    # Hide these models when generating side menu (e.g auth.user)
+    "hide_models": [],
+
+    # List of apps (and/or models) to base side menu ordering off of
+    # (does not need to contain all apps/models)
+    "order_with_respect_to": ["shop", "auth"],
+
+    # Custom links to append to app groups, keyed on app name
+    "custom_links": {
+        # "books": [{
+        #     "name": "Make Messages",
+        #     "url": "make_messages",
+        #     "icon": "fas fa-comments",
+        #     "permissions": ["books.view_book"]
+        # }]
+    },
+
+    # Custom icons for side menu apps/models
+    # See https://fontawesome.com/icons?d=gallery&m=free
+    # for the full list of 5.13.0 free icon classes
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "raffles.Raffle": "fas fa-solid fa-newspaper",
+        "raffles.Ticket": "fas fa-solid fa-newspaper",       
+        "raffles.User": "fas fa-solid fa-newspaper", 
+    },
+    # Icons that are used when one is not manually specified
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+
+    #################
+    # Related Modal #
+    #################
+    # Use modals instead of popups
+    "related_modal_active": False,
+
+    #############
+    # UI Tweaks #
+    #############
+    # Relative paths to custom CSS/JS scripts (must be present in static files)
+    "custom_css": "jazzmin/css/custom.css",
+    #"custom_js": "jazzmin/js/custom.js",
+    # Whether to link font from fonts.googleapis.com
+    # (use custom_css to supply font otherwise)
+    "use_google_fonts_cdn": True,
+    # Whether to show the UI customizer on the sidebar
+    "show_ui_builder": True,
+
+    ###############
+    # Change view #
+    ###############
+    # Render out the change view as a single form, or in tabs, current options are
+    # - single
+    # - horizontal_tabs (default)
+    # - vertical_tabs
+    # - collapsible
+    # - carousel
+    "changeform_format": "horizontal_tabs",
+    # override change forms on a per modeladmin basis
+    "changeform_format_overrides": {
+        "auth.user": "collapsible",
+        "auth.group": "vertical_tabs"
+    },
+}
+
+# Cors
+CORS_ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS').split(',')
+
+CSRF_TRUSTED_ORIGINS = os.getenv('ALLOWED_ORIGINS').split(',')
