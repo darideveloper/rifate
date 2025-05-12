@@ -5,7 +5,7 @@ whitenoise==6.9.0
 gunicorn==23.0.0
 
 # posgresql
-psycopg-binary==3.2.6
+psycopg2-binary==2.9.10
 
 # aws s3 only
 pillow==11.2.1
