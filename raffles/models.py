@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Ticket(models.Model):
     STATUS_OPTIONS = [
@@ -12,7 +13,9 @@ class Ticket(models.Model):
     number = models.IntegerField()
     status = models.CharField(max_length=100, choices=STATUS_OPTIONS, default="FR")
     user = models.ForeignKey("User", on_delete=models.CASCADE, null=True, blank=True)
-    raffle = models.ForeignKey("Raffle", on_delete=models.CASCADE, related_name="tickets")
+    raffle = models.ForeignKey(
+        "Raffle", on_delete=models.CASCADE, related_name="tickets"
+    )
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
@@ -22,6 +25,7 @@ class Ticket(models.Model):
     class Meta:
         verbose_name_plural = "Tickets"
         verbose_name = "Ticket"
+
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
@@ -42,11 +46,12 @@ class User(models.Model):
         """Method to reduce ticket status from an specific user
 
         Args:
-        
+
         Returns:
 
         """
         pass
+
 
 class Raffle(models.Model):
     id = models.AutoField(primary_key=True)
@@ -60,7 +65,7 @@ class Raffle(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def save(self, *args, **kwargs):
         is_new = self.pk is None  # Detectar si es una instancia nueva
         super().save(*args, **kwargs)
@@ -75,12 +80,9 @@ class Raffle(models.Model):
         """Method to create the whole amount of tickets when you create a Raffle
 
         Args:
-        
+
         Returns:
 
         """
-        tickets = [
-        Ticket(number=i, status="FR", raffle=self)
-            for i in range(1, 101)
-        ]
+        tickets = [Ticket(number=i, status="FR", raffle=self) for i in range(1, 101)]
         Ticket.objects.bulk_create(tickets)
