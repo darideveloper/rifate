@@ -24,8 +24,8 @@ class Ticket(models.Model):
     raffle = models.ForeignKey(
         "Raffle", on_delete=models.CASCADE, related_name="tickets", verbose_name="Rifa"
     )
-    created_at = models.DateField(auto_now_add=True, verbose_name="Creado el")
-    updated_at = models.DateField(auto_now=True, verbose_name="Actualizado el")
+    created_at = models.DateField(auto_now_add=True, verbose_name="Fecha de creación")
+    updated_at = models.DateField(auto_now=True, verbose_name="Fecha de actualización")
 
     def __str__(self):
         return f"{self.number} - {self.raffle}"
@@ -44,8 +44,8 @@ class Client(models.Model):
         verbose_name="Teléfono",
         help_text="Formato: 1234567890 o +34123456789",
     )
-    created_at = models.DateField(auto_now_add=True, verbose_name="Creado el")
-    updated_at = models.DateField(auto_now=True, verbose_name="Actualizado el")
+    created_at = models.DateField(auto_now_add=True, verbose_name="Fecha de creación")
+    updated_at = models.DateField(auto_now=True, verbose_name="Fecha de actualización")
 
     def __str__(self):
         return self.name
@@ -77,8 +77,8 @@ class Raffle(models.Model):
         verbose_name="Cantidad de tickets",
         help_text="Cantidad de tickets a crear. Al menos 1",
     )
-    created_at = models.DateField(auto_now_add=True, verbose_name="Creado el")
-    updated_at = models.DateField(auto_now=True, verbose_name="Actualizado el")
+    created_at = models.DateField(auto_now_add=True, verbose_name="Fecha de creación")
+    updated_at = models.DateField(auto_now=True, verbose_name="Fecha de actualización")
 
     def __str__(self):
         return self.name
