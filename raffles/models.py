@@ -10,14 +10,22 @@ class Ticket(models.Model):
     ]
 
     id = models.AutoField(primary_key=True)
-    number = models.IntegerField()
-    status = models.CharField(max_length=4, choices=STATUS_OPTIONS, default="free")
-    user = models.ForeignKey("Client", on_delete=models.CASCADE, null=True, blank=True)
-    raffle = models.ForeignKey(
-        "Raffle", on_delete=models.CASCADE, related_name="tickets"
+    number = models.IntegerField(verbose_name="Número de ticket")
+    status = models.CharField(
+        max_length=4, choices=STATUS_OPTIONS, default="free", verbose_name="Estado"
     )
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    user = models.ForeignKey(
+        "Client",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name="Cliente",
+    )
+    raffle = models.ForeignKey(
+        "Raffle", on_delete=models.CASCADE, related_name="tickets", verbose_name="Rifa"
+    )
+    created_at = models.DateField(auto_now_add=True, verbose_name="Creado el")
+    updated_at = models.DateField(auto_now=True, verbose_name="Actualizado el")
 
     def __str__(self):
         return str(self.number)
@@ -29,11 +37,11 @@ class Ticket(models.Model):
 
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=200)
-    city = models.CharField(max_length=200)
-    phone = models.IntegerField()
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    name = models.CharField(max_length=200, verbose_name="Nombre completo")
+    city = models.CharField(max_length=200, verbose_name="Ciudad")
+    phone = models.IntegerField(verbose_name="Teléfono")
+    created_at = models.DateField(auto_now_add=True, verbose_name="Creado el")
+    updated_at = models.DateField(auto_now=True, verbose_name="Actualizado el")
 
     def __str__(self):
         return self.nombre
@@ -55,13 +63,18 @@ class Client(models.Model):
 
 class Raffle(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=200)
-    banner = models.ImageField(upload_to="banner")
-    start_date = models.DateField(null=True)
-    end_date = models.DateField(null=True)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
-    ticket_price = models.FloatField()
+    name = models.CharField(max_length=200, verbose_name="Nombre")
+    banner = models.ImageField(upload_to="banner", verbose_name="Banner")
+    start_date = models.DateField(verbose_name="Fecha de inicio")
+    end_date = models.DateField(verbose_name="Fecha de fin")
+    ticket_price = models.FloatField(verbose_name="Precio del ticket")
+    tickets_amount = models.IntegerField(
+        default=100,
+        verbose_name="Cantidad de tickets",
+        help_text="Cantidad de tickets a crear. Al menos 1",
+    )
+    created_at = models.DateField(auto_now_add=True, verbose_name="Creado el")
+    updated_at = models.DateField(auto_now=True, verbose_name="Actualizado el")
 
     def __str__(self):
         return self.name
