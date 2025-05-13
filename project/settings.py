@@ -249,7 +249,7 @@ JAZZMIN_SETTINGS = {
         "auth.Group": "fas fa-users",
         "raffles.Raffle": "fas fa-solid fa-calendar-days",
         "raffles.Ticket": "fas fa-solid fa-ticket",
-        "raffles.User": "fas fa-solid fa-user",
+        "raffles.Client": "fas fa-solid fa-user-check",
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
