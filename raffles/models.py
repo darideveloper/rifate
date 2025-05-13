@@ -35,6 +35,52 @@ class Ticket(models.Model):
         verbose_name = "Ticket"
 
 
+class Raffle(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200, verbose_name="Nombre")
+    banner = models.ImageField(upload_to="banner", verbose_name="Banner")
+    start_date = models.DateField(verbose_name="Fecha de inicio")
+    end_date = models.DateField(verbose_name="Fecha de fin")
+    ticket_price = models.FloatField(verbose_name="Precio del ticket")
+    tickets_amount = models.IntegerField(
+        default=100,
+        verbose_name="Cantidad de tickets",
+        help_text="Cantidad de tickets a crear. Al menos 1",
+    )
+    created_at = models.DateField(auto_now_add=True, verbose_name="Fecha de creación")
+    updated_at = models.DateField(auto_now=True, verbose_name="Fecha de actualización")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Rifas"
+        verbose_name = "Rifa"
+
+    def create_tickets(self):
+        """ Create new free tickets for the raffle
+        """
+        for index in range(self.tickets_amount):
+            Ticket.objects.create(
+                number=index + 1,
+                status="free",
+                raffle=self,
+            )
+            
+    def save(self, *args, **kwargs):
+        """Override save method to run custom logic after saving the instance."""
+        
+        # Check if the instance is new (not yet saved to the database)
+        is_new = self.pk is None
+        
+        # Save model instance
+        super().save(*args, **kwargs)
+        
+        # Create tickets only if it's a new instance
+        if is_new:
+            self.create_tickets()
+
+
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, verbose_name="Nombre completo")
@@ -54,52 +100,16 @@ class Client(models.Model):
         verbose_name_plural = "Clientes"
         verbose_name = "Cliente"
 
-    def update_tickets_status(self):
+    def update_tickets_status(self, status: str, raffle: Raffle):
         """Method to reduce ticket status from an specific user
 
         Args:
-
+            status (str): Status to set for the tickets (free, set, paid)
+            
         Returns:
-
+            int: Amount of tickets updated
         """
-        pass
-
-
-class Raffle(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=200, verbose_name="Nombre")
-    banner = models.ImageField(upload_to="banner", verbose_name="Banner")
-    start_date = models.DateField(verbose_name="Fecha de inicio")
-    end_date = models.DateField(verbose_name="Fecha de fin")
-    ticket_price = models.FloatField(verbose_name="Precio del ticket")
-    tickets_amount = models.IntegerField(
-        default=100,
-        verbose_name="Cantidad de tickets",
-        help_text="Cantidad de tickets a crear. Al menos 1",
-    )
-    created_at = models.DateField(auto_now_add=True, verbose_name="Fecha de creación")
-    updated_at = models.DateField(auto_now=True, verbose_name="Fecha de actualización")
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        is_new = self.pk is None  # Detectar si es una instancia nueva
-        super().save(*args, **kwargs)
-        if is_new:
-            self.create_tickets()
-
-    class Meta:
-        verbose_name_plural = "Rifas"
-        verbose_name = "Rifa"
-
-    def create_tickets(self):
-        """Method to create the whole amount of tickets when you create a Raffle
-
-        Args:
-
-        Returns:
-
-        """
-        tickets = [Ticket(number=i, status="FR", raffle=self) for i in range(1, 101)]
-        Ticket.objects.bulk_create(tickets)
+        client_tickets = Ticket.objects.filter(user=self, raffle=raffle)
+        client_tickets.update(status=status)
+        client_tickets_amount = client_tickets.count()
+        return client_tickets_amount
