@@ -28,7 +28,7 @@ class Ticket(models.Model):
     updated_at = models.DateField(auto_now=True, verbose_name="Actualizado el")
 
     def __str__(self):
-        return str(self.number)
+        return f"{self.number} - {self.raffle}"
 
     class Meta:
         verbose_name_plural = "Tickets"
@@ -48,7 +48,7 @@ class Client(models.Model):
     updated_at = models.DateField(auto_now=True, verbose_name="Actualizado el")
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
     class Meta:
         verbose_name_plural = "Clientes"
