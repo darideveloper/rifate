@@ -159,16 +159,16 @@ if STORAGE_AWS:
     # s3 static settings
     STATIC_LOCATION = "static"
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/"
-    STATICFILES_STORAGE = "cadiashop.storage_backends.StaticStorage"
+    STATICFILES_STORAGE = "project.storage_backends.StaticStorage"
     # s3 public media settings
 
     PUBLIC_MEDIA_LOCATION = "media"
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/"
-    DEFAULT_FILE_STORAGE = "cadiashop.storage_backends.PublicMediaStorage"
+    DEFAULT_FILE_STORAGE = "project.storage_backends.PublicMediaStorage"
 
     # s3 private media settings
     PRIVATE_MEDIA_LOCATION = "private"
-    PRIVATE_FILE_STORAGE = "cadiashop.storage_backends.PrivateMediaStorage"
+    PRIVATE_FILE_STORAGE = "project.storage_backends.PrivateMediaStorage"
 
     # Disable Django's own staticfiles handling in favour of WhiteNoise
     # for greater consistency between gunicorn and
@@ -263,7 +263,8 @@ JAZZMIN_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": "core/static/core/css/custom.css",
+    "custom_css": "core/css/custom.css",
+    "custom_js": "core/js/custom.js",   
     # "custom_js": "jazzmin/js/custom.js",
     # Whether to link font from fonts.googleapis.com
     # (use custom_css to supply font otherwise)
