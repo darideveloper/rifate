@@ -4,14 +4,14 @@ from django.db import models
 # Create your models here.
 class Ticket(models.Model):
     STATUS_OPTIONS = [
-        ("FR", "Libre"),
-        ("SET", "Apartado"),
-        ("PD", "Pagado"),
+        ("free", "Libre"),
+        ("set", "Apartado"),
+        ("paid", "Pagado"),
     ]
 
     id = models.AutoField(primary_key=True)
     number = models.IntegerField()
-    status = models.CharField(max_length=100, choices=STATUS_OPTIONS, default="FR")
+    status = models.CharField(max_length=4, choices=STATUS_OPTIONS, default="free")
     user = models.ForeignKey("User", on_delete=models.CASCADE, null=True, blank=True)
     raffle = models.ForeignKey(
         "Raffle", on_delete=models.CASCADE, related_name="tickets"
