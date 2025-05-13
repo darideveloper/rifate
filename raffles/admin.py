@@ -2,22 +2,22 @@ from django.contrib import admin
 from raffles import models
 
 
-# Register your models here.
-@admin.register(models.Client)
-class ClientAdmin(admin.ModelAdmin):
-    list_display = ("name", "city", "phone", "created_at", "updated_at")
-    search_fields = ("name", "city", "created_at", "updated_at")
+@admin.register(models.Ticket)
+class TicketAdmin(admin.ModelAdmin):
+    list_display = ("number", "status", "user", "raffle", "created_at", "updated_at")
+    search_fields = ("number", "user__name", "user__city", "user__phone")
+    list_filter = ("status", "raffle", "updated_at")
     readonly_fields = (
         "created_at",
         "updated_at",
     )
 
 
-@admin.register(models.Ticket)
-class TicketAdmin(admin.ModelAdmin):
-    list_display = ("number", "status", "user", "created_at", "updated_at")
-    search_fields = ("number", "status", "created_at", "updated_at")
-    list_filter = ("status",)
+@admin.register(models.Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ("name", "city", "phone", "updated_at")
+    search_fields = ("name", "city", "phone")
+    list_filter = ("created_at", "updated_at")
     readonly_fields = (
         "created_at",
         "updated_at",
@@ -25,9 +25,14 @@ class TicketAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Raffle)
-class ProductosAdmin(admin.ModelAdmin):
-    list_display = ("name", "created_at", "updated_at", "ticket_price")
-    search_fields = ("name", "created_at", "updated_at")
+class RaffleAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "created_at",
+        "start_date",
+        "ticket_price",
+        "updated_at",
+    )
     readonly_fields = (
         "created_at",
         "updated_at",

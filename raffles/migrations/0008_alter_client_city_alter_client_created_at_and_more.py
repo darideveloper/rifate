@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='client',
             name='created_at',
-            field=models.DateField(auto_now_add=True, verbose_name='Creado el'),
+            field=models.DateField(auto_now_add=True, verbose_name='Fecha de creación'),
         ),
         migrations.AlterField(
             model_name='client',
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='client',
             name='updated_at',
-            field=models.DateField(auto_now=True, verbose_name='Actualizado el'),
+            field=models.DateField(auto_now=True, verbose_name='Fecha de actualización'),
         ),
         migrations.AlterField(
             model_name='raffle',
@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='raffle',
             name='created_at',
-            field=models.DateField(auto_now_add=True, verbose_name='Creado el'),
+            field=models.DateField(auto_now_add=True, verbose_name='Fecha de creación'),
         ),
         migrations.AlterField(
             model_name='raffle',
@@ -77,12 +77,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='raffle',
             name='updated_at',
-            field=models.DateField(auto_now=True, verbose_name='Actualizado el'),
+            field=models.DateField(auto_now=True, verbose_name='Fecha de actualización'),
         ),
         migrations.AlterField(
             model_name='ticket',
             name='created_at',
-            field=models.DateField(auto_now_add=True, verbose_name='Creado el'),
+            field=models.DateField(auto_now_add=True, verbose_name='Fecha de creación'),
         ),
         migrations.AlterField(
             model_name='ticket',
@@ -102,7 +102,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='ticket',
             name='updated_at',
-            field=models.DateField(auto_now=True, verbose_name='Actualizado el'),
+            field=models.DateField(auto_now=True, verbose_name='Fecha de actualización'),
         ),
         migrations.AlterField(
             model_name='ticket',
