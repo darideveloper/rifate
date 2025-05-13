@@ -12,7 +12,7 @@ class Ticket(models.Model):
     id = models.AutoField(primary_key=True)
     number = models.IntegerField()
     status = models.CharField(max_length=4, choices=STATUS_OPTIONS, default="free")
-    user = models.ForeignKey("User", on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey("Client", on_delete=models.CASCADE, null=True, blank=True)
     raffle = models.ForeignKey(
         "Raffle", on_delete=models.CASCADE, related_name="tickets"
     )
@@ -27,7 +27,7 @@ class Ticket(models.Model):
         verbose_name = "Ticket"
 
 
-class User(models.Model):
+class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
@@ -39,8 +39,8 @@ class User(models.Model):
         return self.nombre
 
     class Meta:
-        verbose_name_plural = "Usuarios"
-        verbose_name = "Usuario"
+        verbose_name_plural = "Clientes"
+        verbose_name = "Cliente"
 
     def update_tickets_status(self):
         """Method to reduce ticket status from an specific user

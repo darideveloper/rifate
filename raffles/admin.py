@@ -3,8 +3,8 @@ from raffles import models
 
 
 # Register your models here.
-@admin.register(models.User)
-class UsersAdmin(admin.ModelAdmin):
+@admin.register(models.Client)
+class ClientAdmin(admin.ModelAdmin):
     list_display = ("name", "city", "phone", "created_at", "updated_at")
     search_fields = ("name", "city", "created_at", "updated_at")
     readonly_fields = (
@@ -14,7 +14,7 @@ class UsersAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Ticket)
-class TicketsAdmin(admin.ModelAdmin):
+class TicketAdmin(admin.ModelAdmin):
     list_display = ("number", "status", "user", "created_at", "updated_at")
     search_fields = ("number", "status", "created_at", "updated_at")
     list_filter = ("status",)
