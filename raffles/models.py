@@ -39,7 +39,11 @@ class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, verbose_name="Nombre completo")
     city = models.CharField(max_length=200, verbose_name="Ciudad")
-    phone = models.IntegerField(verbose_name="Teléfono")
+    phone = models.CharField(
+        max_length=15,
+        verbose_name="Teléfono",
+        help_text="Formato: 1234567890 o +34123456789",
+    )
     created_at = models.DateField(auto_now_add=True, verbose_name="Creado el")
     updated_at = models.DateField(auto_now=True, verbose_name="Actualizado el")
 
