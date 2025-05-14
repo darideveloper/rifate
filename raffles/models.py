@@ -14,7 +14,7 @@ class Ticket(models.Model):
     status = models.CharField(
         max_length=4, choices=STATUS_OPTIONS, default="free", verbose_name="Estado"
     )
-    user = models.ForeignKey(
+    client = models.ForeignKey(
         "Client",
         on_delete=models.CASCADE,
         null=True,
@@ -101,15 +101,16 @@ class Client(models.Model):
         verbose_name = "Cliente"
 
     def update_tickets_status(self, status: str, raffle: Raffle):
-        """Method to reduce ticket status from an specific user
+        """Method to reduce ticket status from an specific client
 
         Args:
             status (str): Status to set for the tickets (free, set, paid)
-            
+            raffle (Raffle): Raffle instance to filter tickets
+
         Returns:
             int: Amount of tickets updated
         """
-        client_tickets = Ticket.objects.filter(user=self, raffle=raffle)
+        client_tickets = Ticket.objects.filter(client=self, raffle=raffle)
         client_tickets.update(status=status)
         client_tickets_amount = client_tickets.count()
         return client_tickets_amount

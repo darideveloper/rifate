@@ -4,8 +4,8 @@ from raffles import models
 
 @admin.register(models.Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ("number", "status", "user", "raffle", "created_at", "updated_at")
-    search_fields = ("number", "user__name", "user__city", "user__phone")
+    list_display = ("number", "status", "client", "raffle", "created_at", "updated_at")
+    search_fields = ("number", "client__name", "client__city", "client__phone")
     list_filter = ("status", "raffle", "updated_at")
     readonly_fields = (
         "created_at",
