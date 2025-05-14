@@ -192,9 +192,9 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Bienvenido a Rifate",
     "copyright": "Powered By Niels Bored & Dari Developer © 2025 All rights reserved",
     # Media
-    "site_logo": "shop/logo.png",
-    "login_logo": "shop/logo.png",
-    "login_logo_dark": "shop/logo.png",
+    "site_logo": "core/images/logo.webp",
+    "login_logo": "core/images/logo.webp",
+    "login_logo_dark": "core/images/logo.webp",
     "site_logo_classes": "img-circle",
     "site_icon": "shop/favicon.png",
     # Search model in header
