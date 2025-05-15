@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/icon" href="./branding/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boletos Disponibles - Rifate</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="{% static 'raffles/assets/boletos-2THPXRnY.js' %}"></script>
+  <link rel="modulepreload" crossorigin href="{% static 'raffles/assets/aos-BcB2iz9S.js' %}">
+  <link rel="stylesheet" crossorigin href="{% static 'raffles/assets/aos-D3cAoYN9.css' %}">
+</head>
+
+<body>
+  <header class="header">
+      <div class="container">
+        <div class="header__content">
+          <div class="logo">
+            <a href="/">
+              <img src="{% static 'raffles/branding/logo.webp' %}" alt="Rifate Logo" class="logo__image">
+            </a>
+          </div>
+          <nav class="nav">
+            <ul class="nav__list">
+              <li class="nav__item"><a href="#about" class="nav__link">Nosotros</a></li>
+              <li class="nav__item"><a href="#testimonials" class="nav__link">Testimonios</a></li>
+              <li class="nav__item"><a href="#contact" class="nav__link">Contacto</a></li>
+              <li class="nav__item"><a href="/boletos.html" class="nav__link nav__link--highlight">Ver Boletos</a></li>
+            </ul>
+            <button class="nav__toggle" id="navToggle">
+              <span class="hamburger"></span>
+            </button>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+  <footer class="footer" data-aos="fade-up">
+    <div class="container">
+      <div class="footer__content">
+        <div class="footer__logo">
+          <h2>Rifate</h2>
+          <p>Tu destino para grandes premios</p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__column">
+            <h3>Enlaces Rápidos</h3>
+            <ul>
+              <li><a href="/#about">Nosotros</a></li>
+              <li><a href="/#testimonials">Testimonios</a></li>
+              <li><a href="/#contact">Contacto</a></li>
+              <li><a href="/boletos.html">Ver Boletos</a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h3>Recursos</h3>
+            <ul>
+              <li><a href="#">Preguntas Frecuentes</a></li>
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Privacidad</a></li>
+              <li><a href="#">Cómo Participar</a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h3>Síguenos</h3>
+            <div class="footer__social">
+              <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 Rifate. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

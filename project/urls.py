@@ -3,9 +3,15 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path
 
+from raffles.views import (
+    HomeView,
+    TicketsView
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", HomeView.as_view(), name="home"),
+    path("tickets", TicketsView.as_view(), name="tickets"),
 ]
 
 if not settings.STORAGE_AWS:
