@@ -25,23 +25,23 @@
     <div class="raffle-showcase" data-aos="zoom-in" data-aos-delay="200">
       <div class="raffle-card">
         <div class="raffle-card__image">
-          <img src="https://images.pexels.com/photos/3422964/pexels-photo-3422964.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Smart TV">
+          <img src="{{ raffle.banner.url }}" alt="Smart TV">
           <span class="raffle-card__badge">¡Gran Premio!</span>
         </div>
         <div class="raffle-card__content">
-          <h3 class="raffle-card__title">Smart TV 65" 4K Ultra HD</h3>
-          <p class="raffle-card__description">Disfruta de la mejor calidad de imagen con esta increíble Smart TV de última generación.</p>
+          <h3 class="raffle-card__title">{{ raffle.name }}</h3>
+          <p class="raffle-card__description">{{ raffle.description }}</p>
           <div class="raffle-card__details">
             <div class="raffle-card__detail">
               <i class="fas fa-calendar-alt"></i>
-              <span>Sorteo: 30 de Diciembre, 2025</span>
+              <span>Sorteo: {{ raffle.start_date }}</span>
             </div>
             <div class="raffle-card__detail">
               <i class="fas fa-ticket-alt"></i>
-              <span>Valor: $10 por boleto</span>
+              <span>Valor: ${{ raffle.ticket_price }} por boleto</span>
             </div>
           </div>
-          <a href="/boletos.html" class="btn btn--primary">Participar Ahora</a>
+          <a href="{% url 'tickets' %}" class="btn btn--primary">Participar Ahora</a>
         </div>
       </div>
     </div>
