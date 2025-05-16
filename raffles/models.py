@@ -39,6 +39,7 @@ class Raffle(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, verbose_name="Nombre")
     banner = models.ImageField(upload_to="banner", verbose_name="Banner")
+    description = models.CharField(max_length=200, verbose_name="Descripción")
     start_date = models.DateField(verbose_name="Fecha de inicio")
     end_date = models.DateField(verbose_name="Fecha de fin")
     ticket_price = models.FloatField(verbose_name="Precio del ticket")
