@@ -188,14 +188,14 @@ JAZZMIN_SETTINGS = {
     # Yext
     "site_title": "Rifate",
     "site_header": "Admin",
-    "site_brand": "Rifate",
+    "site_brand": "Rifate Admin",
     "welcome_sign": "Bienvenido a Rifate",
     "copyright": "Powered By Niels Bored & Dari Developer © 2025 All rights reserved",
     # Media
-    "site_logo": "core/images/logo.webp",
+    "site_logo": "core/images/logo-square.webp",
     "login_logo": "core/images/logo.webp",
     "login_logo_dark": "core/images/logo.webp",
-    "site_logo_classes": "img-circle",
+    "site_logo_classes": "",
     "site_icon": "shop/favicon.png",
     # Search model in header
     "search_model": ["raffles.Raffle"],
