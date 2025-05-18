@@ -15,8 +15,8 @@ class TicketAdmin(admin.ModelAdmin):
 
 @admin.register(models.Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ("name", "city", "phone", "updated_at")
-    search_fields = ("name", "city", "phone")
+    list_display = ("name", "city", "phone", "email", "updated_at")
+    search_fields = ("name", "city", "phone", "email")
     list_filter = ("created_at", "updated_at")
     readonly_fields = (
         "created_at",
