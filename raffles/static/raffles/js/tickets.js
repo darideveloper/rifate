@@ -390,3 +390,17 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTicketGrid();
   }
 });
+
+// Custom events
+const formElem = document.getElementById('reservationForm');
+if (formElem) {
+  formElem.addEventListener('submit', function (e) {
+    e.preventDefault();
+    
+    // get numbers from modal visible text
+    const selectedTicketsElem = document.querySelector('#selectedTicketNumber > span');
+    const selectedTickets = selectedTicketsElem.innerHTML.split(',').map(Number);
+    console.log({selectedTickets});
+
+  });
+}
