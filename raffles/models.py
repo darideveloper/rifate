@@ -68,19 +68,6 @@ class Raffle(models.Model):
                 raffle=self,
             )
             
-    def save(self, *args, **kwargs):
-        """Override save method to run custom logic after saving the instance."""
-        
-        # Check if the instance is new (not yet saved to the database)
-        is_new = self.pk is None
-        
-        # Save model instance
-        super().save(*args, **kwargs)
-        
-        # Create tickets only if it's a new instance
-        if is_new:
-            self.create_tickets()
-
 
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
