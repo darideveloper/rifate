@@ -75,7 +75,7 @@
     <p>Números seleccionados: <span id="selectedTicketNumber" class="selected-ticket"></span></p>
   </div>
   <div class="modal__body">
-    <form id="reservationForm">
+    <form id="reservationForm" action="{% url 'tickets' %}">
       <div class="form-group">
         <label for="fullName">Nombre Completo</label>
         <input type="text" id="fullName" name="fullName" required>

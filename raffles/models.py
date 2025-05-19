@@ -42,7 +42,7 @@ class Raffle(models.Model):
     description = models.CharField(max_length=200, verbose_name="Descripción")
     start_date = models.DateField(verbose_name="Fecha de inicio")
     end_date = models.DateField(verbose_name="Fecha de fin")
-    ticket_price = models.FloatField(verbose_name="Precio del ticket")
+    ticket_price = models.IntegerField(verbose_name="Precio del ticket")
     tickets_amount = models.IntegerField(
         default=100,
         verbose_name="Cantidad de tickets",
@@ -91,6 +91,7 @@ class Client(models.Model):
         verbose_name="Teléfono",
         help_text="Formato: 1234567890 o +34123456789",
     )
+    email = models.CharField(max_length=200, unique=True)
     created_at = models.DateField(auto_now_add=True, verbose_name="Fecha de creación")
     updated_at = models.DateField(auto_now=True, verbose_name="Fecha de actualización")
 
