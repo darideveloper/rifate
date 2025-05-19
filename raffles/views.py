@@ -27,13 +27,9 @@ class TicketsView(View):
 
         client = Client.objects.filter(email=email).first()
         raffle = Raffle.objects.all().firtst()
-        
+
         if client is None:
-            Client.objects.create(
-                name=name, 
-                city=city, 
-                phone=phone, 
-                email=email)
-            
+            Client.objects.create(name=name, city=city, phone=phone, email=email)
+
         else:
             Client.update_tickets_status(status="set", raffle=raffle)
