@@ -11,10 +11,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="{% static 'raffles/assets/boletos-2THPXRnY.js' %}"></script>
-  <link rel="modulepreload" crossorigin href="{% static 'raffles/assets/aos-BcB2iz9S.js' %}">
-  <link rel="stylesheet" crossorigin href="{% static 'raffles/assets/aos-D3cAoYN9.css' %}">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'raffles/css/main.css' %}" />
+  <style>
+    // Local fonts
+    @font-face
+        font-family: 'ClashDisplay'
+        src: url({% static 'raffles/fonts/clash-display/ClashDisplay-Regular.otf' %}) format('opentype')
+        font-weight: normal
+        font-style: normal
+  
+    @font-face
+        font-family: 'ClashDisplay'
+        src: url({% static 'raffles/fonts/clash-display/ClashDisplay-Bold.otf' %}) format('opentype')
+        font-weight: bold
+        font-style: normal
+  
+    @font-face
+        font-family: 'Coolvetica'
+        src: url({% static 'raffles/fonts/coolvetica/Coolvetica Rg.otf' %}) format('opentype')
+        font-weight: normal
+        font-style: normal
+  </style>
 </head>
+
 
 <body>
   <header class="header">
@@ -89,6 +109,16 @@
       </div>
     </div>
   </footer>
+
+ <script src="{% static 'raffles/js/main.js' %}" type="module"></script>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200,
+      once: true,
+    });
+  </script>
 
 </body>
 
