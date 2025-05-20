@@ -272,11 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!phoneNumber) {
       showError('phoneNumberError', 'Por favor ingresa tu número telefónico');
-    } else if (!isValidPhoneNumber(phoneNumber)) {
-      showError('phoneNumberError', 'Ingresa un número telefónico válido');
-      isValid = false;
     }
-    
     if (!userEmail) {
       showError('userEmailError', 'Por favor ingresa tu correo electrónico');
     } else if (!isValidEmail(userEmail)) {
