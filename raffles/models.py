@@ -78,7 +78,7 @@ class Client(models.Model):
         verbose_name="Teléfono",
         help_text="Formato: 1234567890 o +34123456789",
     )
-    email = models.CharField(max_length=200, unique=True)
+    email = models.EmailField(max_length=200, unique=True)
     created_at = models.DateField(auto_now_add=True, verbose_name="Fecha de creación")
     updated_at = models.DateField(auto_now=True, verbose_name="Fecha de actualización")
 
