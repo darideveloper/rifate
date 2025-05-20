@@ -53,16 +53,14 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEventListeners();
 
   function initTicketsData() {
+    const reservedSet = new Set(set_tickets);
+    const soldSet = new Set(paid_tickets);
     for (let i = 1; i <= TOTAL_TICKETS; i++) {
-      const randomStatus = Math.random();
       let status = 'available';
-      
-      if (randomStatus < 0.1) {
-        status = 'sold';
-      } else if (randomStatus < 0.2) {
-        status = 'reserved';
-      }
-      
+
+      status = reservedSet.has(i) ? 'reserved' : status;
+      status = soldSet.has(i) ? 'sold' : status;
+
       ticketsData[i] = {
         number: i,
         status: status

@@ -128,6 +128,9 @@
 
 <script>
   const TOTAL_TICKETS = {{ raffle.tickets_amount }};
+  let set_tickets = {{ set_tickets }};
+  let paid_tickets = {{ paid_tickets }};
+  console.log(set_tickets)
 </script>
 <script src="{% static 'raffles/js/tickets.js' %}" type="module"></script>
 
