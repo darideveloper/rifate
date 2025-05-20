@@ -1,7 +1,9 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
 
 from .models import Raffle, Ticket, Client
+import json
 
 
 # Create your views here.
@@ -20,16 +22,33 @@ class TicketsView(View):
         )
 
     def post(self, request):
-        name = request.POST["fullName"]
-        city = request.POST["city"]
-        phone = request.POST["phoneNumber"]
-        email = request.POST["userEmail"]
+        data = json.loads(request.body)
+        
+        name = data.get("fullName")
+        city = data.get("city")
+        phone = data.get("phoneNumber")
+        email = data.get("userEmail")
+        tickets = data.get("selectedTickets")
+        tickets = tickets.split(", ")
+        print(tickets)
 
-        client = Client.objects.filter(email=email).first()
-        raffle = Raffle.objects.all().firtst()
+        client = Client.objects.all().filter(email=email).first()
+        raffle = Raffle.objects.all().first()
 
         if client is None:
-            Client.objects.create(name=name, city=city, phone=phone, email=email)
+            client = Client.objects.create(name=name, city=city, phone=phone, email=email)
 
         else:
-            Client.update_tickets_status(status="set", raffle=raffle)
+            pass
+        
+        for ticket_number in tickets:
+            ticket =  Ticket.objects.get(number=ticket_number)
+            ticket.status = "set"
+            ticket.client = client
+            ticket.raffle = raffle
+            ticket.save()
+
+        
+        return JsonResponse({"message": "Datos recibidos correctamente"}, status=200)
+
+ 

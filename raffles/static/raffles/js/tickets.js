@@ -390,17 +390,51 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTicketGrid();
   }
 });
-
+// Custom methods
+function getCSRFToken() {
+    return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+}
 // Custom events
 const formElem = document.getElementById('reservationForm');
 if (formElem) {
-  formElem.addEventListener('submit', function (e) {
+  formElem.addEventListener('submit', async function(e) {
     e.preventDefault();
     
     // get numbers from modal visible text
     const selectedTicketsElem = document.querySelector('#selectedTicketNumber > span');
-    const selectedTickets = selectedTicketsElem.innerHTML.split(',').map(Number);
-    console.log({selectedTickets});
+    const selectedTickets = selectedTicketsElem.innerHTML
 
+    const fullName = document.getElementById("fullName").value;
+    const city = document.getElementById("city").value;
+    const phoneNumber = document.getElementById("phoneNumber").value;
+    const userEmail = document.getElementById("userEmail").value;
+
+    const payload = {
+      fullName,
+      city,
+      phoneNumber,
+      userEmail,
+      selectedTickets
+    };
+
+    try {
+      const response = await fetch("/tickets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Respuesta exitosa:", data);
+      } else {
+        console.error("Error en la petición:", response.status);
+      }
+    } catch (error) {
+      console.error("Error de red:", error);
+    }
   });
 }
