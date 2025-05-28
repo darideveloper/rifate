@@ -6,15 +6,15 @@
 <section id="home" class="hero" data-aos="fade-up">
   <div class="container">
     <div class="hero__content">
-      <h2 class="hero__title">¡Gana premios increíbles con nuestras rifas!</h2>
-      <p class="hero__text">Participa en nuestras rifas exclusivas y llévate a casa premios espectaculares. ¡Tú podrías ser el próximo ganador!</p>
+      <h2 class="hero__title">¡Gana premios increíbles rifandotela con un boleto!</h2>
+      <p class="hero__text">Participa en nuestras rifas exclusivas y llevate a casa premios increibles. ¡Lo tuyo llega cuando te rifas!</p>
       <div class="hero__cta">
         <a href="{%url 'tickets' %}" class="btn btn--primary">Ver Boletos Disponibles</a>
         <a href="#current-raffle" class="btn btn--secondary">Rifa Actual</a>
       </div>
     </div>
     <div class="hero__image">
-      <img src="https://images.pexels.com/photos/5076531/pexels-photo-5076531.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Premio principal">
+      <img src="{% static 'raffles/images/rifate-ticket.webp' %}" alt="Premio principal">
     </div>
   </div>
 </section>
@@ -50,15 +50,18 @@
 
 <section id="about" class="about" data-aos="fade-up">
   <div class="container">
-    <h2 class="section-title" data-aos="fade-up">Sobre Nosotros</h2>
+    <h2 class="section-title" data-aos="fade-up">¡CONOCENOS!</h2>
     <div class="about__content">
       <div class="about__image" data-aos="fade-right" data-aos-delay="200">
-        <img src="https://images.pexels.com/photos/7148384/pexels-photo-7148384.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Nuestro equipo">
+        <img src="{% static 'raffles/images/foto-sobre-nosotro.webp' %}" alt="Nuestro equipo">
       </div>
       <div class="about__text" data-aos="fade-left" data-aos-delay="400">
         <h3>Tu confianza es nuestra prioridad</h3>
-        <p>En Rifate, nos dedicamos a organizar rifas transparentes y emocionantes desde 2018. Nuestra misión es brindar a nuestros participantes la oportunidad de ganar increíbles premios con un sistema justo y transparente.</p>
-        <p>Cada sorteo es transmitido en vivo a través de nuestras redes sociales, garantizando la legitimidad de cada premio entregado. Contamos con miles de ganadores satisfechos en todo el país.</p>
+        <p>Somos Manlio Barrera y Mauricio Benito, los creadores de Rífate.</p>
+        <p>Lanzamos este proyecto con una idea clara: acercar premios increíbles a personas reales, de forma transparente, segura y divertida.</p>
+        <p>En Rífate creemos que cualquiera puede ganar algo grande con muy poco. Queremos construir una comunidad que confíe, se emocione y se rifa con nosotros en cada sorteo.</p>
+        <p>Soñamos con hacer de cada rifa una experiencia única, donde participar sea tan emocionante como ganar.</p>
+
         <div class="about__stats">
           <div class="about__stat">
             <span class="about__stat-number" data-value="5000">0</span>
@@ -82,30 +85,13 @@
   <div class="container">
     <h2 class="section-title" data-aos="fade-up">Lo que dicen nuestros ganadores</h2>
     <div class="testimonials__slider" id="testimonialsSlider">
-      <div class="testimonial-card" data-aos="flip-left" data-aos-delay="200">
-        <div class="testimonial-card__image">
-          <img src="{% static 'raffles/testimonials/client-1.jpeg' %}" alt="Juan Pérez">
-        </div>
-        <div class="testimonial-card__content">
-          <p class="testimonial-card__text">"Gané un iPhone en la rifa de Rifate y no puedo estar más feliz. El proceso fue muy sencillo y el equipo siempre estuvo disponible para ayudarme."</p>
-          <h4 class="testimonial-card__name">Juan Pérez</h4>
-          <p class="testimonial-card__location">Ciudad de México</p>
-          <div class="testimonial-card__rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-      </div>
       <div class="testimonial-card" data-aos="flip-left" data-aos-delay="400">
         <div class="testimonial-card__image">
-          <img src="{% static 'raffles/testimonials/client-2.jpeg' %}" alt="María González">
+          <img src="{% static 'raffles/images/testimonials/itzel-acosta.webp' %}" alt="Itzel Acosta">
         </div>
         <div class="testimonial-card__content">
-          <p class="testimonial-card__text">"Participé en la rifa de un iPhone y no podía creer que gané. El servicio al cliente fue excepcional y me ayudaron en todo momento."</p>
-          <h4 class="testimonial-card__name">María González</h4>
+          <p class="testimonial-card__text">"Gané un iPhone y no puedo estar más feliz. El proceso fue muy sencillo y el equipo siempre estuvo disponible para ayudarme."</p>
+          <h4 class="testimonial-card__name">ITZEL ACOSTA</h4>
           <p class="testimonial-card__location">Guadalajara</p>
           <div class="testimonial-card__rating">
             <i class="fas fa-star"></i>
@@ -118,11 +104,11 @@
       </div>
       <div class="testimonial-card" data-aos="flip-left" data-aos-delay="600">
         <div class="testimonial-card__image">
-          <img src="{% static 'raffles/testimonials/client-3.jpeg' %}" alt="Carlos Ramírez">
+          <img src="{% static 'raffles/images/testimonials/miguel-lucas.webp' %}" alt="Miguel Angel Lucas">
         </div>
         <div class="testimonial-card__content">
-          <p class="testimonial-card__text">"Participé en varias rifas hasta que gané una computadora gaming. Todo el proceso fue muy claro y la entrega fue rápida. Definitivamente seguiré participando."</p>
-          <h4 class="testimonial-card__name">Carlos Ramírez</h4>
+          <p class="testimonial-card__text">"Participé en la rifa de un iPhone y no podía creer que gané. Ya quiero las rifas de carros!."</p>
+          <h4 class="testimonial-card__name">Miguel Angel Lucas</h4>
           <p class="testimonial-card__location">Monterrey</p>
           <div class="testimonial-card__rating">
             <i class="fas fa-star"></i>
@@ -130,6 +116,23 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
             <i class="fas fa-star-half-alt"></i>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card" data-aos="flip-left" data-aos-delay="200">
+        <div class="testimonial-card__image">
+          <img src="{% static 'raffles/images/testimonials/fabricio-lucero.webp' %}" alt="Fabricio Lucero">
+        </div>
+        <div class="testimonial-card__content">
+          <p class="testimonial-card__text">"Compre varios boletos hasta que gané una computadora gaming. Todo el proceso fue muy claro, me enviaron el premio por paqueteria, pense que no me llegaria pero todo llegó al 100!"</p>
+          <h4 class="testimonial-card__name">Fabricio Lucero</h4>
+          <p class="testimonial-card__location">Ciudad de México</p>
+          <div class="testimonial-card__rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
           </div>
         </div>
       </div>
@@ -147,15 +150,15 @@
         <ul class="contact__list">
           <li class="contact__item">
             <i class="fas fa-map-marker-alt"></i>
-            <span>Av. Principal #123, Col. Centro, Ciudad de México</span>
+            <span>C. Rio Lerma #4, Col. Cuauhtémoc, Ciudad de méxico</span>
           </li>
           <li class="contact__item">
             <i class="fas fa-phone"></i>
-            <span>+52 55 1234 5678</span>
+            <span>+52 55 2182 5608</span>
           </li>
           <li class="contact__item">
             <i class="fas fa-envelope"></i>
-            <span>info@Rifate.com</span>
+            <span>rifateemexico@gmail.com</span>
           </li>
         </ul>
         <div class="contact__social">
