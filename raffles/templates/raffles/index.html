@@ -168,7 +168,8 @@
         </div>
       </div>
       <div class="contact__form-container" data-aos="fade-left" data-aos-delay="400">
-        <form class="contact__form" id="contactForm">
+        <form class="contact__form" id="contactForm" action="https://services.darideveloper.com/contact-form/" method="post">
+          {% csrf_token %}
           <div class="form-group">
             <label for="name">Nombre Completo</label>
             <input type="text" id="name" name="name" required>
@@ -186,6 +187,11 @@
             <textarea id="message" name="message" rows="4" required></textarea>
           </div>
           <button type="submit" class="btn btn--primary">Enviar Mensaje</button>
+
+          {% comment %} Hidden inputs {% endcomment %}
+          <input type="hidden" name="user" id="user" value="rifate">
+          <input type="hidden" name="api_key" id="api_key" value="qnP9OE0skO8QA8Jj26zpD2kU8Q">
+          <input type="hidden" name="redirect" id="redirect" value="{{host}}?thanks=true">
         </form>
       </div>
     </div>

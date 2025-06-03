@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
+from django.conf import settings
 
 from .models import Raffle, Ticket, Client
 import json
@@ -10,7 +11,9 @@ import json
 class HomeView(View):
     def get(self, request):
         raffle = Raffle.objects.all().first()
-        return render(request, "raffles/index.html", {"raffle": raffle})
+        return render(
+            request, "raffles/index.html", {"raffle": raffle, "host": settings.HOST}
+        )
 
 
 class TicketsView(View):
