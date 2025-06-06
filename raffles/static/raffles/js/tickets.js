@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Constants for ticket grid
   const TICKETS_PER_PAGE = 200
   // TOTAL_TICKETS FROM DJANGO IN HTML
-  const TICKET_PRICE = 10
+  // TICKET_PRICE FROM DJANGO IN HTML
 
   // Elements
   const ticketGrid = document.getElementById('ticketGrid')
