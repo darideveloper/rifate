@@ -293,13 +293,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       closeTicketModal()
 
-      // Redirect to whatsapp
-      const whatsappMessage = `Hola, me llamo ${fullName}, Soy de ${city}. mi numero de telefono es: ${phoneNumber} y mi correo: ${userEmail}. Aparté los boletos ${Array.from(selectedTickets).sort((a, b) => a - b).join(', ')} y quiero continuar con el proceso de pago`
-      console.log({ whatsappMessage })
-      window.open(`https://wa.me/525527119218?text=${encodeURIComponent(whatsappMessage)}`, '_blank')
-
-      // Redirect to home page
-      window.location.href = '/'
+      if (confirmationModal) {
+        confirmationModal.classList.add('active');
+      }
 
     }
   }
@@ -308,9 +304,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (confirmationModal) {
       confirmationModal.classList.remove('active')
     }
+    
+    // Get client info from localStorage
+    const clientInfo = JSON.parse(localStorage.getItem('clientInfo'))
+    if (!clientInfo) {
+      console.error('No client info found in localStorage')
+      return
+    }
+    const { fullName, city, phoneNumber, userEmail, selectedTickets } = clientInfo
 
-    selectedTickets.clear()
-    renderTicketGrid()
+    // Redirect to whatsapp
+    const whatsappMessage = `Hola, me llamo ${fullName}, Soy de ${city}. mi numero de telefono es: ${phoneNumber} y mi correo: ${userEmail}. Aparté los boletos ${Array.from(selectedTickets).sort((a, b) => a - b).join(', ')} y quiero continuar con el proceso de pago`
+    console.log({ whatsappMessage })
+    window.open(`https://wa.me/525527119218?text=${encodeURIComponent(whatsappMessage)}`, '_blank')
+
+    // Redirect to home page
+    window.location.href = '/'
   }
 
   function resetFormErrors() {
@@ -432,6 +441,16 @@ if (formElem) {
       } else {
         console.error("Error en la petición:", response.status)
       }
+
+      // Save client info in localStorage
+      localStorage.setItem('clientInfo', JSON.stringify({
+        fullName,
+        city,
+        phoneNumber,
+        userEmail,
+        selectedTickets: selectedTickets.split(',').map(ticket => ticket.trim())
+      }))
+
     } catch (error) {
       console.error("Error de red:", error)
     }
